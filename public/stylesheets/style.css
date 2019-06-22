@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    margin: auto;
+    margin-top: 80px;
+    border: green 2px 
+    solid;
+    padding: 50px;
+    width: 600px;
+    height: 600px;
+}
+
+.detail {
+    text-align: center;
+    padding: 20px;
+    padding-top: 25px;
+    margin: auto;
+    width: 100%;
+}
+
+.btnChoose {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 450px;
+}
+

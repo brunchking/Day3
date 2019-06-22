@@ -1,0 +1,115 @@
+const category = ['eggRoll', 'toast', 'burger'];
+const material = {
+    'bacon': 35,
+    'ham': 30,
+    'pork': 40,
+    'porkChop': 45,
+    'chicken': 40,
+    'hashBrownCheese': 50,
+    'lemonChicken': 50,
+    'smokedChicken': 55,
+    'karaChicken': 60,
+    'firedFish': 60 
+};
+const drink = {
+    'juice': 25,
+    'blackTea': 25,
+    'soyMilk': 25,
+    'milkTea': 35
+};
+let price = 0;
+let layer = 0;
+class Breakfast{
+    constructor(categoryName, materialPrice, drinkPrice) {
+        this.categoryName = categoryName;
+        this.materialPrice = materialPrice;
+        this.drinkPrice = drinkPrice;
+        if (categoryName === 'burger') {
+            this.materialPrice += 5
+        }
+        price += (this.materialPrice + this.drinkPrice);
+    }
+    total() {
+        return price;
+    }
+}
+
+const materialLength = Object.keys(material).length;
+const randomDrinkLength = Object.keys(drink).length;
+const randomCategoryNum =  Math.floor(Math.random() * category.length);
+const randomMaterialNum = Math.floor(Math.random() * materialLength);
+const randomDrinkNum = Math.floor(Math.random() * randomDrinkLength);
+const order = new Breakfast(category[randomCategoryNum], material[Object.keys(material)[randomMaterialNum]], drink[Object.keys(drink)[randomDrinkNum]]);
+
+layer = 3;
+console.log(`Category:${order.categoryName}
+Material:${Object.keys(material)[randomMaterialNum]}
+M_price: ${order.materialPrice}
+Drink: ${Object.keys(drink)[randomDrinkNum]}
+D_price: ${order.drinkPrice}
+Total: ${order.total()}
+Layer: ${layer}`
+);
+
+
+/*
+switch (order.categoryName) {
+    case 'toast':
+    case 'burger':
+        layer = 3
+        break;
+    case 'eggRoll':
+        layer = 2;
+        break;
+    default:
+        layer = 1;
+}
+*/
+
+let boxArray = ['box1', 'box2', 'box3'];
+const color = ['yellow', 'white', 'orange'];
+let categoryArray = ['toast.png', 'burger.png', 'eggRoll.png'];
+const main = document.querySelector('.main');
+let i , text, perHeight;
+
+i = 0, perHeight = 500 / layer;
+for (i = 0; i < layer; i++) {
+    boxArray[i] = document.createElement("div");
+    //boxArray[i].setAttribute('style', `background-color: ${color[i]}`);
+    boxArray[i].style.height = `${perHeight}px`;
+    boxArray[i].style.backgroundRepeat = 'no-repeat';
+    boxArray[i].style.backgroundPosition = 'center';
+    // text = document.createTextNode(`box${i}`);
+    // boxArray[i].appendChild(text);
+    main.appendChild(boxArray[i]);
+}
+
+if (layer === 3) {
+    for (i = 0; i < layer; i++) {
+        if (i != 1) {
+            boxArray[i].style.backgroundImage = 'url("./public/images/toast.png")';
+            boxArray[i].style.backgroundSize = '95% 100%';
+        }
+        else if (Object.keys(material)[randomMaterialNum] === 'firedFish') {
+            boxArray[i].style.backgroundImage =
+            `url(./public/images/friedFish.png)`;
+            boxArray[i].style.backgroundSize = '65% 55%';
+        }
+        else { 
+            /*boxArray[i].style.backgroundImage =
+            `url(./public/images/${Object.keys(materialPic)[randomMaterialNum]})`;*/
+            boxArray[i].style.backgroundImage =
+            `url(./public/images/${Object.keys(material)[randomMaterialNum]}.png)`;
+            boxArray[i].style.backgroundSize = '75% 100%';
+        }
+    }
+}
+else if (layer === 2) {
+    main.classList.add('two');
+}
+else {
+    main.classList.add('one');
+}
+
+
+
